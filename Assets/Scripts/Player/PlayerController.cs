@@ -1,11 +1,17 @@
 using System;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerController : MonoBehaviour, IHit
+    public class PlayerController : MonoBehaviour
     {
         public static PlayerController Instance = null;
+        private Health _health;
+        private float _healthValue = 100f;
+        private int _enemyCounter = 0;
+
+        public int EnemyCounter => _enemyCounter;
 
         private void Awake()
         {
@@ -21,17 +27,25 @@ namespace Player
 
         private void Start()
         {
-            
+            Initialize();
         }
 
-        private void Update()
+        private void Initialize()
         {
-        
+            _health = GetComponent<Health>();
+            _health.SetMaxValue(_healthValue);
+            _health.SetCurrentValue(_healthValue);
+            _health.OnDie += Dead;
         }
 
-        public void Hit()
+        private void Dead()
         {
-            throw new NotImplementedException();
+            _health.OnDie -= Dead;
+        }
+
+        public void Count()
+        {
+            _enemyCounter++;
         }
     }
 }

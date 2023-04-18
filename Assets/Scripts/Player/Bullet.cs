@@ -8,6 +8,7 @@ namespace Player
     public class Bullet : MonoBehaviour
     {
         [SerializeField] private float speed = 5f;
+        [SerializeField] private float damage = 25f;
         private void Start()
         {
             StartCoroutine(Missing());
@@ -22,6 +23,8 @@ namespace Player
         {
             if (col.GetComponent<EnemyController>())
             {
+                var health = col.gameObject.GetComponent<Health>();
+                health.Decrease(damage);
                 Destroy(gameObject);
             }
         }

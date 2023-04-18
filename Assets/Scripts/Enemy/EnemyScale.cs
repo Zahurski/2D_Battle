@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class EnemyScale : EnemyController
+    public class EnemyScale : MonoBehaviour
     {
         private const float InitialScaleTime = 5.0f;
         private readonly Vector3 _startingScale = Vector3.one * 0.05f;
@@ -12,11 +12,12 @@ namespace Enemy
         private float _lerpT;
         private float _fScaleTime;
         private bool _scaleActive = true;
- 
-        
+
         public event Action ScaleCompleted;
-        private void Start()
+
+        public void Initialize()
         {
+            _scaleActive = true;
             ScaleTime = InitialScaleTime;
             _lerpT = 0f;
         }

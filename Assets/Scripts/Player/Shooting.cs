@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class Shooting : MonoBehaviour
+    public class Shooting : MonoBehaviour, IHit
     {
         [SerializeField] private GameObject bulletPrefab;
         private Camera _camera;
@@ -15,6 +15,11 @@ namespace Player
 
         private void Update()
         {
+            Hit();
+        }
+
+        public void Hit()
+        {
             RotationWeapon();
             
             if (Input.GetMouseButtonDown(0))
@@ -22,7 +27,7 @@ namespace Player
                 Instantiate(bulletPrefab, transform.position, transform.rotation);
             }
         }
-
+        
         private void RotationWeapon()
         {
             var mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
