@@ -16,7 +16,13 @@ namespace Enemy
         
         private void Start()
         {
+            Initialize();
+        }
+
+        private void Initialize()
+        {
             _startPosition = transform.position;
+            Debug.Log(_startPosition);
             _collider = GetComponent<CircleCollider2D>();
             _enemyScale = gameObject.GetComponent<EnemyScale>();
             _enemyScale.ScaleCompleted += ActivateEnemy;
@@ -59,6 +65,12 @@ namespace Enemy
             {
                 _active = false;
             }
+        }
+
+        private void Death()
+        {
+            _enemyScale.ScaleCompleted -= ActivateEnemy;
+            Initialize();
         }
     }
 }
