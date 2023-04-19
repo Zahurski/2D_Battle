@@ -41,6 +41,7 @@ namespace Player
         private void Dead()
         {
             _health.OnDie -= Dead;
+            LoadingScene.Instance.LoadScene(2);
         }
 
         public void Count()
